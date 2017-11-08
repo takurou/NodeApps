@@ -49,40 +49,44 @@ for(　var i = 0 ; i < fileListLength; i++){
   
   //<title>タグの中身をtitleTextに格納
   var titleText = (/<title>((?:(?!<title>|\<\/title>)[^\s　])+)/g).exec(changeFileData);
-
-  //<title>タグの中身og:titleのcontentに設定
-  var ogpTitleText = '<meta property="og:title" content="'+titleText[1]+'">';
   
-  //og:titleの置換前のテキストをreOgpTitleTextに格納
-  reOgpTitleText = new RegExp('<meta property="og:title" content="[\\s\\S]*?">', "g");
+  //<title>タグがなかった場合は処理をしない
+  if(titleText != null){ 
   
-  //descriptionの中身をdescriptionTextに格納
-  var descriptionText = (/<meta name="description" content="((?:(?!<meta name="description" content="|\">)[^\s　])+)/g).exec(changeFileData);
-
-  //descriptionの中身og:descriptionのcontentに設定
-  var ogpDescriptText = '<meta property="og:description" content="'+descriptionText[1]+'">';
-  
-  //og:descriptionの置換前のテキストをreOgpDescriptTextに格納
-  reOgpDescriptText = new RegExp('<meta property="og:description" content="[\\s\\S]*?">', "g");
-  
-  files = changeFile.replace(_dir,"");
-  
-  if( files.match("/index.html") ){
-   files = files.replace("/index.html","/");
-  }
-  
-  //filePath + files をog:urlのcontentに設定
-  var ogpUrlText = '<meta property="og:url" content="http://www.nangoku.co.jp' + files + '">';
-  
-  //og:descriptionの置換前のテキストをreOgpDescriptTextに格納
-  reOgpUrlText = new RegExp('<meta property="og:url" content="[\\s\\S]*?">', "g");
+   //<title>タグの中身og:titleのcontentに設定
+   var ogpTitleText = '<meta property="og:title" content="'+titleText[1]+'">';
    
-  //置換実行  
-  changeFileData = changeFileData.replace(reOgpTitleText , ogpTitleText); 
-  changeFileData = changeFileData.replace(reOgpDescriptText , ogpDescriptText); 
-  changeFileData = changeFileData.replace(reOgpUrlText , ogpUrlText); 
-  
-  //置換したhtmlを書き込み
-  fs.writeFileSync(changeFile, changeFileData);
+   //og:titleの置換前のテキストをreOgpTitleTextに格納
+   reOgpTitleText = new RegExp('<meta property="og:title" content="[\\s\\S]*?">', "g");
+   
+   //descriptionの中身をdescriptionTextに格納
+   var descriptionText = (/<meta name="description" content="((?:(?!<meta name="description" content="|\">)[^\s　])+)/g).exec(changeFileData);
+ 
+   //descriptionの中身og:descriptionのcontentに設定
+   var ogpDescriptText = '<meta property="og:description" content="'+descriptionText[1]+'">';
+   
+   //og:descriptionの置換前のテキストをreOgpDescriptTextに格納
+   reOgpDescriptText = new RegExp('<meta property="og:description" content="[\\s\\S]*?">', "g");
+   
+   files = changeFile.replace(_dir,"");
+   
+   if( files.match("/index.html") ){
+    files = files.replace("/index.html","/");
+   }
+   
+   //filePath + files をog:urlのcontentに設定
+   var ogpUrlText = '<meta property="og:url" content="http://www.nangoku.co.jp' + files + '">';
+   
+   //og:descriptionの置換前のテキストをreOgpDescriptTextに格納
+   reOgpUrlText = new RegExp('<meta property="og:url" content="[\\s\\S]*?">', "g");
+    
+   //置換実行  
+   changeFileData = changeFileData.replace(reOgpTitleText , ogpTitleText); 
+   changeFileData = changeFileData.replace(reOgpDescriptText , ogpDescriptText); 
+   changeFileData = changeFileData.replace(reOgpUrlText , ogpUrlText); 
+   
+   //置換したhtmlを書き込み
+   fs.writeFileSync(changeFile, changeFileData);
+  }
 }
 
