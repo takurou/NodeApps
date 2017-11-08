@@ -1,13 +1,13 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 //検索範囲のディレクトリ
-var _dir = __dirname ;
+const _dir = __dirname ;
 _dir = _dir.replace(/\/apps/g, ""); 
 
 //インクルードファイルの設置ディレクトリ
-var incFolder = 'include'
-var _incdir = _dir + '/' + incFolder ;
+const incFolder = 'include'
+const _incdir = _dir + '/' + incFolder ;
 
 //変数定義
 var incFile ="";
@@ -48,10 +48,10 @@ searchFile(_dir,function(path){
 
 
 //インクルードファイルの設置ディレクトリにあるファイル数
-var incfileListLength = incfileList.length;
+const incfileListLength = incfileList.length;
 
 //htmlファイルの数
-var fileListLength = fileList.length;
+const fileListLength = fileList.length;
 
 for(　var i = 0 ; i < incfileListLength; i++){
 
