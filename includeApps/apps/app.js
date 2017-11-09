@@ -18,7 +18,7 @@ let changePath = "";
 //インクルードファイルの設置ディレクトリにあるファイル検索
 incfiles = fs.readdirSync(_incdir);
 incfiles.filter(function(incfile){
- return fs.statSync(_incdir + "/" + incfile).isFile() && /.*\.html$/.test(incfile); //htmlファイルしか修正しないように絞り込み 
+ return fs.statSync(_incdir + "/" + incfile).isFile() && /.*\.html$/.test(incfile); 
 }).forEach(function (incfile) {
  incfileList.push(incfile);
 });
@@ -34,7 +34,7 @@ let searchFile = function(path, fileCallback){
   }else if(fs.statSync(_f).isDirectory()){
    searchFile(_f, fileCallback);
   }else{
-   if(~_f.indexOf('.html')){
+   if(~_f.indexOf('.html')){//htmlファイルしか修正しないように絞り込み 
      fileCallback(_f);
    }
   }
